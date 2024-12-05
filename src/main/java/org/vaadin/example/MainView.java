@@ -6,6 +6,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * that shows a greeting message in a notification.
  */
 @Route(layout = MainLayout.class)
+@Menu(title = "Hello", order = 1, icon = "vaadin:comment-o")
 public class MainView extends VerticalLayout {
 
     /**
