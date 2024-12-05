@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * The main view contains a text field for getting the user name and a button
  * that shows a greeting message in a notification.
  */
-@Route
+@Route(layout = MainLayout.class)
 public class MainView extends VerticalLayout {
 
     /**
