@@ -2,7 +2,9 @@ package org.vaadin.example;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -38,10 +40,13 @@ public class PersonView extends VerticalLayout {
 
     public PersonView(@Autowired PersonService personService, @Autowired PersonDataProvider dataProvider) {
 
+        setSizeFull();
+
         ConfigurableFilterDataProvider filteredDataProvider = dataProvider.withConfigurableFilter();
 
         Grid<Person> grid = new Grid<>(Person.class);
         grid.setDataProvider(filteredDataProvider);
+        grid.setSizeFull();
         grid.setColumns("firstName", "lastName", "age", "email");
 
         firstName = new TextField("First Name");
@@ -60,6 +65,7 @@ public class PersonView extends VerticalLayout {
                         "Only gmail.com email addresses are allowed")
                         .bind(Person::getEmail, Person::setEmail);
 
+        grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
         grid.addSelectionListener(event -> {
             // in real life list would be backed by list dto with limited fields
             // we might want to fetch entity details by id
@@ -73,6 +79,7 @@ public class PersonView extends VerticalLayout {
         });
 
         save = new Button("Save");
+        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         save.addClickListener(e -> {
             try {
                 if (this.currentPerson == null) {
@@ -91,7 +98,7 @@ public class PersonView extends VerticalLayout {
         masterLayout.add(grid);
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
-        horizontalLayout.setWidthFull();
+        horizontalLayout.setSizeFull();
         horizontalLayout.add(masterLayout);
         horizontalLayout.add(createDetails());
 
@@ -100,7 +107,7 @@ public class PersonView extends VerticalLayout {
 
     private TextField buildSearchField(ConfigurableFilterDataProvider dataProvider) {
         TextField searchField = new TextField();
-        searchField.setWidth("25%");
+        searchField.setWidthFull();
         searchField.setPlaceholder("Search");
         searchField.setPrefixComponent(new Icon(VaadinIcon.SEARCH));
         searchField.setValueChangeMode(ValueChangeMode.EAGER);
@@ -112,6 +119,7 @@ public class PersonView extends VerticalLayout {
 
     private Component createDetails() {
         VerticalLayout layout = new VerticalLayout();
+        layout.setAlignItems(Alignment.STRETCH);
         layout.setMaxWidth("30%");
         layout.add(new H3("Person Details"));
         layout.add(firstName);
