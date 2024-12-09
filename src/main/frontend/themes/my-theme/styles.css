@@ -17,3 +17,15 @@ vaadin-text-field.bordered::part(input-field) {
 }
 
 
+vaadin-app-layout::part(navbar) {
+  background-color: orange;
+}
+
+vaadin-app-layout::part(drawer) {
+  border-right: 1px solid orange;
+}
+
+vaadin-side-nav-item[current] {
+  background-color: lightgray;
+}
+
