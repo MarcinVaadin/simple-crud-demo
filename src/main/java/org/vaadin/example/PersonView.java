@@ -11,6 +11,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
@@ -48,9 +49,16 @@ public class PersonView extends VerticalLayout {
         age = new IntegerField("Age");
         email = new EmailField("Email");
 
-        Binder<Person> binder = new Binder<>(Person.class);
+        Binder<Person> binder = new BeanValidationBinder<>(Person.class);
         binder.setBean(currentPerson);
-        binder.bindInstanceFields(this);
+        binder.bind(firstName, "firstName");
+        binder.bind(lastName, "lastName");
+        binder.bind(age, "age");
+        binder.forField(email)
+                .withValidator(
+                        email -> email.endsWith("@gmail.com"),
+                        "Only gmail.com email addresses are allowed")
+                        .bind(Person::getEmail, Person::setEmail);
 
         grid.addSelectionListener(event -> {
             // in real life list would be backed by list dto with limited fields
