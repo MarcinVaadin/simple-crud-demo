@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Objects;
+
 @Entity
 public class Person {
 
@@ -73,5 +75,18 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    // required to refresh single item in the grid
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(id, person.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
