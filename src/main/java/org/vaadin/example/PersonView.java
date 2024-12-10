@@ -20,6 +20,7 @@ import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.example.data.Person;
 import org.vaadin.example.data.PersonDataProvider;
@@ -27,6 +28,7 @@ import org.vaadin.example.data.PersonService;
 
 @Route(value = "person", layout = MainLayout.class)
 @Menu(title = "People", icon = "vaadin:users")
+@RolesAllowed("ADMIN")
 public class PersonView extends VerticalLayout {
 
     private Person currentPerson;

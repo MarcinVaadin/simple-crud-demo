@@ -8,6 +8,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Route(layout = MainLayout.class)
 @Menu(title = "Hello", order = 1, icon = "vaadin:comment-o")
+@AnonymousAllowed
 public class MainView extends VerticalLayout {
 
     /**
