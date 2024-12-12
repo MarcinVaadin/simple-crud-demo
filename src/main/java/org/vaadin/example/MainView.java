@@ -1,5 +1,10 @@
 package org.vaadin.example;
 
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.textfield.TextArea;
+
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -37,6 +42,44 @@ public class MainView extends VerticalLayout {
      *            The message service. Automatically injected Spring managed bean.
      */
     public MainView(@Autowired GreetService service) {
+        TextField firstNameField = new TextField("Imię");
+        firstNameField.setMinLength(3);
+        firstNameField.setMaxLength(32);
+        firstNameField.setHelperText("Wprowadź swoje imię");
+        firstNameField.setPlaceholder("Imię");
+
+        TextField lastNameField = new TextField("Nazwisko");
+        lastNameField.setMinLength(3);
+        lastNameField.setMaxLength(32);
+        lastNameField.setHelperText("Wprowadź swoje nazwisko");
+        lastNameField.setPlaceholder("Nazwisko");
+
+        TextField ageField = new TextField("Wiek");
+        ageField.setPattern("[1-9][6-9]|[1-9][0-9]");
+        ageField.setHelperText("Wprowadź swój wiek");
+        ageField.setPlaceholder("Wiek");
+
+        ComboBox<String> countryField = new ComboBox<>("Kraj");
+        countryField.setItems("USA", "Kanada", "Meksyk");
+        countryField.setHelperText("Wybierz swój kraj");
+        countryField.setPlaceholder("Kraj");
+
+        TextField streetField = new TextField("Ulica");
+        streetField.setHelperText("Wprowadź swoją ulicę");
+        streetField.setPlaceholder("Ulica");
+
+        TextField houseNumberField = new TextField("Numer domu");
+        houseNumberField.setHelperText("Wprowadź numer domu");
+        houseNumberField.setPlaceholder("Numer domu");
+
+        TextArea orderCommentField = new TextArea("Komentarz do zamówienia");
+        orderCommentField.setHelperText("Dodaj komentarz do zamówienia");
+        orderCommentField.setPlaceholder("Komentarz");
+
+        add(new HorizontalLayout(firstNameField, lastNameField),
+            new HorizontalLayout(ageField, countryField),
+            new HorizontalLayout(streetField, houseNumberField),
+            orderCommentField);
 
         // Use TextField for standard text input
         TextField textField = new TextField("Your name");
